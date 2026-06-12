@@ -5,19 +5,16 @@ Todo es gratis salvo donde se indica.
 
 ## Parte 1 — Publicar el código (GitHub, 5 min)
 
-- [ ] 1.1 Entra a github.com/Kratcker/Kratcker y abre la pestaña **Pull requests**.
-- [ ] 1.2 Crea el pull request de la rama
-      `claude/used-parts-marketplace-venezuela-seak2p` hacia `main`
-      (GitHub te lo sugiere con un botón amarillo) y dale **Merge**.
-      Así la página queda en la rama principal, que es la que Vercel publicará.
+- [x] 1.1 ~~Pull request en Kratcker~~ Hecho ✅ — y mejor aún: Chivera ahora
+      vive en su propio repositorio `Kratcker/chivera`.
 
 ## Parte 2 — Vercel: poner la página en internet (10 min)
 
 - [ ] 2.1 Crea tu cuenta en [vercel.com](https://vercel.com) → **Sign up with GitHub**
       (usa tu cuenta de GitHub, así Vercel ve tu repositorio).
-- [ ] 2.2 Clic en **Add New → Project** e importa el repositorio `Kratcker/Kratcker`.
+- [ ] 2.2 Clic en **Add New → Project** e importa el repositorio `Kratcker/chivera`.
 - [ ] 2.3 ⚠️ El paso clave: en **Root Directory** haz clic en *Edit* y selecciona
-      `repuestos-venezuela/web`. (Si no haces esto, el deploy falla.)
+      `web`. (Si no haces esto, el deploy falla.)
 - [ ] 2.4 En **Environment Variables** agrega:
       - `NEXT_PUBLIC_WHATSAPP_NUMBER` = tu número de ventas en formato
         internacional sin el `+`. Ejemplo: si tu número es +1 (786) 555-1234,
