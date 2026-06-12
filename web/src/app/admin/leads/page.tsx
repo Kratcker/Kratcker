@@ -19,6 +19,8 @@ interface Lead {
 
 interface Subscriber {
   id: string;
+  first_name: string | null;
+  last_name: string | null;
   email: string | null;
   phone: string | null;
   discount_code: string;
@@ -107,6 +109,7 @@ function LeadsView() {
           <table className="w-full text-left text-sm">
             <thead className="border-b border-slate-200 bg-slate-50 text-xs uppercase text-slate-500">
               <tr>
+                <th className="px-4 py-3">Nombre</th>
                 <th className="px-4 py-3">Correo</th>
                 <th className="px-4 py-3">WhatsApp</th>
                 <th className="px-4 py-3">Código</th>
@@ -116,6 +119,9 @@ function LeadsView() {
             <tbody>
               {subs.map((s) => (
                 <tr key={s.id} className="border-b border-slate-100">
+                  <td className="px-4 py-3 font-medium text-ink">
+                    {[s.first_name, s.last_name].filter(Boolean).join(" ") || "—"}
+                  </td>
                   <td className="px-4 py-3">{s.email ?? "—"}</td>
                   <td className="px-4 py-3">{s.phone ?? "—"}</td>
                   <td className="px-4 py-3 font-mono text-xs">{s.discount_code}</td>
