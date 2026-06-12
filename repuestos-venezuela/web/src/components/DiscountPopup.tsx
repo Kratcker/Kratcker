@@ -8,6 +8,8 @@ const inputClass =
 
 export function DiscountPopup() {
   const [open, setOpen] = useState(false);
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [code, setCode] = useState<string | null>(null);
@@ -30,6 +32,10 @@ export function DiscountPopup() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError(null);
+    if (!firstName.trim()) {
+      setError("Dinos tu nombre.");
+      return;
+    }
     if (!email && !phone) {
       setError("Déjanos al menos tu correo o tu WhatsApp.");
       return;
@@ -39,7 +45,7 @@ export function DiscountPopup() {
       const res = await fetch("/api/subscribers", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, phone }),
+        body: JSON.stringify({ firstName, lastName, email, phone }),
       });
       const data = await res.json();
       if (!res.ok) {
@@ -99,6 +105,23 @@ export function DiscountPopup() {
               llegue el repuesto que buscas.
             </p>
             <form className="mt-5 space-y-3" onSubmit={submit}>
+              <div className="grid grid-cols-2 gap-3">
+                <input
+                  type="text"
+                  placeholder="Tu nombre"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  required
+                  className={inputClass}
+                />
+                <input
+                  type="text"
+                  placeholder="Tu apellido"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  className={inputClass}
+                />
+              </div>
               <input
                 type="email"
                 placeholder="Tu correo electrónico"

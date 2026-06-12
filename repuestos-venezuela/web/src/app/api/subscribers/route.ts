@@ -3,9 +3,14 @@ import { getSupabase } from "@/lib/supabase";
 
 export async function POST(request: Request) {
   const body = await request.json().catch(() => null);
+  const firstName = typeof body?.firstName === "string" ? body.firstName.trim() : "";
+  const lastName = typeof body?.lastName === "string" ? body.lastName.trim() : "";
   const email = typeof body?.email === "string" ? body.email.trim() : "";
   const phone = typeof body?.phone === "string" ? body.phone.trim() : "";
 
+  if (!firstName) {
+    return NextResponse.json({ error: "Dinos tu nombre." }, { status: 400 });
+  }
   if (!email && !phone) {
     return NextResponse.json(
       { error: "Déjanos al menos tu correo o tu WhatsApp." },
@@ -19,6 +24,8 @@ export async function POST(request: Request) {
   const supabase = getSupabase();
   if (supabase) {
     const { error } = await supabase.from("subscribers").insert({
+      first_name: firstName,
+      last_name: lastName || null,
       email: email || null,
       phone: phone || null,
       source: "descuento-10",

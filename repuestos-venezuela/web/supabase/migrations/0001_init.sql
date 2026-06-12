@@ -41,6 +41,8 @@ create table public.leads (
 -- Contactos captados con el descuento de primera compra
 create table public.subscribers (
   id uuid primary key default gen_random_uuid(),
+  first_name text,
+  last_name text,
   email text,
   phone text,
   source text not null default 'descuento-10',
