@@ -16,10 +16,16 @@ envío, tiempos, forma de pago).
 
 | Tema | Decisión |
 |---|---|
+| **Marca** | **Chivera** — la palabra venezolana para junkyard. Eslogan: "Encuentra tu parte". Posicionamiento: "la chivera en la que sí puedes confiar" |
+| Diferenciadores | **Inspección de cada pieza antes del envío** + **garantía** (reposición o reembolso) + precios justos y estables |
 | Alcance MVP | Catálogo público + solicitud de pedido (sin pagos en línea al inicio) |
 | Inventario | Panel de administración + agente de IA encargado de mantenerlo |
 | Contacto / IA | Chat con IA en la web **y** WhatsApp |
 | Presupuesto | $0/mes para arrancar (todo en capas gratuitas) |
+
+> Pendiente de verificar fuera de este entorno: disponibilidad del dominio
+> (chivera.com / chivera.com.ve u opciones como somoschivera.com) y búsqueda
+> de marca en USPTO y SAPI antes de registrar.
 
 ## 3. Stack técnico (costo $0 para empezar)
 
