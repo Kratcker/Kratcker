@@ -27,6 +27,7 @@ export interface Part {
   fitments: Fitment[];
   available: boolean;
   inspected: boolean;
+  photos?: string[];
 }
 
 export const categoryLabels: Record<Category, string> = {
@@ -147,35 +148,8 @@ export const parts: Part[] = [
   },
 ];
 
-export function getPart(slug: string): Part | undefined {
-  return parts.find((p) => p.slug === slug);
-}
-
-export function allMakes(): string[] {
-  return [...new Set(parts.flatMap((p) => p.fitments.map((f) => f.make)))].sort();
-}
-
 export interface CatalogFilters {
   q?: string;
   make?: string;
   category?: string;
-}
-
-export function searchParts({ q, make, category }: CatalogFilters): Part[] {
-  return parts.filter((p) => {
-    if (make && !p.fitments.some((f) => f.make === make)) return false;
-    if (category && p.category !== category) return false;
-    if (q) {
-      const haystack = [
-        p.title,
-        p.description,
-        categoryLabels[p.category],
-        ...p.fitments.map((f) => `${f.make} ${f.model}`),
-      ]
-        .join(" ")
-        .toLowerCase();
-      if (!haystack.includes(q.toLowerCase())) return false;
-    }
-    return true;
-  });
 }

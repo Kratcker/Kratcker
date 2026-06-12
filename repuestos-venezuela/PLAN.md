@@ -57,7 +57,7 @@ envío, tiempos, forma de pago).
 - Página de "Cómo funciona": pedido → confirmación → pago → envío → entrega,
   con tiempos estimados (aéreo vs. marítimo) y preguntas frecuentes.
 
-### Fase 2 — Panel de administración
+### Fase 2 — Panel de administración + captura de contactos
 - Login privado (Supabase Auth).
 - Cargar repuestos **desde el teléfono en el junkyard**: fotos con la cámara,
   marca/modelo/año, condición, costo de compra, precio base.
@@ -65,6 +65,9 @@ envío, tiempos, forma de pago).
   (y `vendido/descartado`).
 - Bandeja de solicitudes (leads): ver qué pidió cada cliente, su contacto y el
   estado del seguimiento.
+- **Captura de contactos:** popup de "10% de descuento en tu primera compra"
+  que guarda correo y WhatsApp del visitante (tabla `subscribers`), para
+  enviarles ofertas y hacerles seguimiento aunque salgan de la página.
 - Métricas básicas: repuestos más buscados, margen por pieza, leads por semana.
 
 ### Fase 3 — Asistente de IA
