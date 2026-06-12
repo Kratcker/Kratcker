@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { DiscountPopup } from "@/components/DiscountPopup";
 import { site, whatsappLink } from "@/lib/site";
 import "./globals.css";
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </header>
 
         <main className="flex-1">{children}</main>
+        <DiscountPopup />
 
         <footer className="border-t border-slate-200 bg-white">
           <div className="mx-auto grid max-w-6xl gap-6 px-4 py-10 text-sm text-slate-600 sm:grid-cols-3">

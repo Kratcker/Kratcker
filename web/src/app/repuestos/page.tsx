@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { PartCard } from "@/components/PartCard";
-import { allMakes, categoryLabels, searchParts, type Category } from "@/lib/inventory";
+import { filterParts, getMakes } from "@/lib/catalog";
+import { categoryLabels, type Category } from "@/lib/inventory";
 
 export const metadata: Metadata = {
   title: "Catálogo de repuestos usados inspeccionados",
@@ -14,8 +15,8 @@ interface Props {
 
 export default async function CatalogPage({ searchParams }: Props) {
   const { q, make, category } = await searchParams;
-  const results = searchParts({ q, make, category });
-  const makes = allMakes();
+  const results = await filterParts({ q, make, category });
+  const makes = await getMakes();
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-10">

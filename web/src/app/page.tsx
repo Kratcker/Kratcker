@@ -1,7 +1,9 @@
 import Link from "next/link";
 import { PartCard } from "@/components/PartCard";
-import { parts } from "@/lib/inventory";
+import { getParts } from "@/lib/catalog";
 import { site, whatsappLink } from "@/lib/site";
+
+export const revalidate = 60;
 
 const promises = [
   {
@@ -26,8 +28,8 @@ const promises = [
   },
 ];
 
-export default function HomePage() {
-  const featured = parts.slice(0, 4);
+export default async function HomePage() {
+  const featured = (await getParts()).slice(0, 4);
   return (
     <>
       <section className="bg-ink text-white">

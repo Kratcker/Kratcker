@@ -36,6 +36,20 @@ export function EncargoForm() {
       className="mt-8 space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm"
       onSubmit={(e) => {
         e.preventDefault();
+        // Guarda el lead para seguimiento aunque el cliente no llegue a
+        // enviar el mensaje de WhatsApp.
+        fetch("/api/leads", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            name: form.nombre,
+            city: form.ciudad,
+            vehicle: `${form.marca} ${form.modelo} ${form.anio}`,
+            part_requested: form.pieza,
+            details: form.detalles,
+            source: "encargo-web",
+          }),
+        }).catch(() => {});
         window.open(whatsappLink(message), "_blank", "noopener,noreferrer");
       }}
     >

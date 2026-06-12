@@ -1,19 +1,20 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { categoryLabels, conditionLabels, getPart, parts } from "@/lib/inventory";
+import { getPart } from "@/lib/catalog";
+import { categoryLabels, conditionLabels } from "@/lib/inventory";
 import { whatsappLink } from "@/lib/site";
+
+// El inventario vive en la base de datos: se renderiza bajo demanda y se
+// refresca cada minuto.
+export const revalidate = 60;
 
 interface Props {
   params: Promise<{ slug: string }>;
 }
 
-export function generateStaticParams() {
-  return parts.map((p) => ({ slug: p.slug }));
-}
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
-  const part = getPart(slug);
+  const part = await getPart(slug);
   if (!part) return {};
   const fitment = part.fitments[0];
   return {
@@ -24,7 +25,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 
 export default async function PartPage({ params }: Props) {
   const { slug } = await params;
-  const part = getPart(slug);
+  const part = await getPart(slug);
   if (!part) notFound();
 
   const message = `Hola, me interesa este repuesto de la página de Chivera: ${part.title} (${part.fitments
@@ -59,9 +60,23 @@ export default async function PartPage({ params }: Props) {
       <h1 className="mt-1 text-3xl font-black text-ink">{part.title}</h1>
 
       <div className="mt-6 grid gap-8 sm:grid-cols-2">
-        <div className="flex h-64 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 text-7xl">
-          🔧
-        </div>
+        {part.photos && part.photos.length > 0 ? (
+          <div className="space-y-3">
+            {part.photos.map((src) => (
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                key={src}
+                src={src}
+                alt={part.title}
+                className="w-full rounded-2xl border border-slate-200 object-cover"
+              />
+            ))}
+          </div>
+        ) : (
+          <div className="flex h-64 items-center justify-center rounded-2xl bg-gradient-to-br from-slate-100 to-slate-200 text-7xl">
+            🔧
+          </div>
+        )}
         <div>
           <p className="text-3xl font-black text-ink">
             ${part.priceUsd} <span className="text-base font-medium text-slate-500">USD precio base</span>

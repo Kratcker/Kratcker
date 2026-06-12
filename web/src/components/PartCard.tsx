@@ -19,9 +19,14 @@ export function PartCard({ part }: { part: Part }) {
       href={`/repuestos/${part.slug}`}
       className="group flex flex-col overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
     >
-      <div className="flex h-36 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
-        {categoryIcons[part.category]}
-      </div>
+      {part.photos && part.photos.length > 0 ? (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={part.photos[0]} alt={part.title} className="h-36 w-full object-cover" />
+      ) : (
+        <div className="flex h-36 items-center justify-center bg-gradient-to-br from-slate-100 to-slate-200 text-5xl">
+          {categoryIcons[part.category]}
+        </div>
+      )}
       <div className="flex flex-1 flex-col gap-1 p-4">
         <p className="text-xs font-medium uppercase tracking-wide text-brand-dark">
           {categoryLabels[part.category]}
